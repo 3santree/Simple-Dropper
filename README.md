@@ -4,15 +4,14 @@
 
 Generate dropper to do these things for you:
 
-1. Download aes encrypted shellcode from stage-listener's url
-2. Decrypt it
-3. Run it using CreatThread method
+1. Download shellcode from sliver's stage listener
+2. Run it using EarlyBird Method
 
 ### Usage
 
 Have your sliver's http(s) stage-listener ready like this:
 ```
-sliver> stage-listener -u https://example.com:443 --aes-encrypt-key <key> --aes-encrypt-iv <iv> -p <your implant profile>
+stage-listener -u https://example.com:443 --aes-encrypt-key <key> --aes-encrypt-iv <iv> -p <your implant profile>
 ```
 
 Run this project with the url and aes key

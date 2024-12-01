@@ -1,4 +1,4 @@
-module stager
+module github.com/3santree/Simper-Dropper
 
 go 1.23.3
 
