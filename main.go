@@ -32,8 +32,8 @@ func main() {
 
 	opt.Url = opt.Url + "/font.woff"
 
-	if opt.Url == "" || opt.Key == "" {
-		log.Fatalf("Need both url and key!\n")
+	if opt.Url == "" {
+		log.Fatalf("Need url\n")
 	}
 
 	fmt.Printf("[+] Request: %s\n", opt.Url)

